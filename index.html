@@ -2,168 +2,149 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Chop 2 Nassre Game</title>
+<title>Nassre Ait Akka</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:
-    radial-gradient(circle at top, #5fd3ff55, transparent 60%),
-    linear-gradient(135deg,#0a3d62,#0b2f4a);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#fff;
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:radial-gradient(circle at top, #3aa0ff, #0b2b4a);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
 }
 
 .card{
-  background:#0e5fa8;
-  width:340px;
-  border-radius:20px;
-  padding:20px;
-  box-shadow:
-    0 0 25px #4fc3ff,
-    inset 0 0 15px #ffffff33;
-  text-align:center;
-  display:none;
+    width:340px;
+    background:#0f4c81;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:
+        0 0 20px #4fc3ff,
+        0 0 40px rgba(79,195,255,0.6);
+    text-align:center;
 }
 
-.card.active{display:block;}
+h2{
+    margin:5px 0;
+}
 
-h1{margin:5px 0;}
-.home{font-size:28px;}
+select, input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border:none;
+    border-radius:10px;
+    font-size:15px;
+}
 
 button{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border:none;
-  border-radius:25px;
-  background:linear-gradient(90deg,#2ecc71,#a3ff12);
-  font-size:16px;
-  cursor:pointer;
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(90deg,#2ecc71,#27ae60);
+    color:white;
+    font-size:16px;
+    cursor:pointer;
 }
 
-input,select{
-  width:100%;
-  padding:10px;
-  margin-top:8px;
-  border-radius:20px;
-  border:none;
+.product{
+    background:#08365e;
+    padding:10px;
+    border-radius:12px;
+    margin:6px 0;
+    cursor:pointer;
+    box-shadow:0 0 10px rgba(79,195,255,0.5);
 }
 
-.lang{
-  background:#2ecc71;
-  border-radius:20px;
-  padding:8px;
-  margin:5px 0;
-  cursor:pointer;
+.product.active{
+    background:#2ecc71;
+    color:black;
 }
 
 .footer{
-  margin-top:10px;
-  font-size:14px;
-  opacity:0.9;
+    margin-top:10px;
+    font-size:13px;
+    opacity:0.9;
 }
 </style>
 </head>
 
 <body>
 
-<!-- الصفحة 1 -->
-<div class="card active" id="page1">
-  <h1>Nassre Ait Akka 🏠</h1>
-  <p>🔒 الأمان والمصداقية</p>
+<div class="card">
 
-  <div class="lang" onclick="setLang('ar')">العربية</div>
-  <div class="lang" onclick="setLang('fr')">Français</div>
+<h2>🏠 Nassre Ait Akka</h2>
+<p>🔒 الأمان والمصداقية</p>
 
-  <p id="welcome">مرحبا بكم<br>موقع آمن وسريع لتعبئة الرصيد</p>
-  <button onclick="nextPage(2)">إكمال</button>
+<select id="lang">
+<option>العربية</option>
+<option>Français</option>
+</select>
 
-  <div class="footer">
-    📞 0611026116<br>
-    📷 Instagram
-  </div>
+<h3>💎 اختر كمية الجواهر</h3>
+
+<div id="products"></div>
+
+<input type="text" placeholder="معرف اللاعب">
+<input type="text" placeholder="رقم التعبئة (14 أو 16 رقم)">
+<input type="text" placeholder="ملاحظات">
+
+<button onclick="sendWhatsApp()">إرسال الطلب إلى واتساب</button>
+
+<div class="footer">
+📞 0611026116 <br>
+📷 Instagram <br>
+🙏 شكرا لثقتكم – إلى اللقاء
 </div>
 
-<!-- الصفحة 2 -->
-<div class="card" id="page2">
-  <h2>🛒 المنتج</h2>
-  <p>🔥 عرض خاص</p>
-
-  <p style="font-size:18px;font-weight:bold">
-    7 دراهم : 50 × 2
-  </p>
-
-  <button onclick="nextPage(3)">إكمال</button>
-  <button onclick="nextPage(1)">🏠 الرئيسية</button>
-</div>
-
-<!-- الصفحة 3 -->
-<div class="card" id="page3">
-  <h2>💳 الدفع والمعلومات</h2>
-
-  <input type="text" id="name" placeholder="الاسم الكامل">
-  <select id="operator">
-    <option value="">اختيار الشركة</option>
-    <option>اتصالات المغرب</option>
-    <option>Orange</option>
-    <option>Inwi</option>
-  </select>
-  <input type="number" id="code" placeholder="رمز التعبئة (14 أو 16 رقم)">
-  <input type="text" id="note" placeholder="ملاحظة">
-
-  <button onclick="sendWhatsApp()">إرسال الطلب إلى واتساب</button>
-  <button onclick="nextPage(1)">🏠 الرئيسية</button>
-
-  <div class="footer">
-    🙏 شكرا لثقتكم — إلى اللقاء
-  </div>
 </div>
 
 <script>
-let lang="ar";
+const data = [
+  {dh:7, diamonds:100},
+  {dh:14, diamonds:200},
+  {dh:28, diamonds:400},
+  {dh:56, diamonds:800},
+  {dh:112, diamonds:1600},
+  {dh:154, diamonds:2200}
+];
 
-function setLang(l){
-  lang=l;
-  document.getElementById("welcome").innerHTML=
-    l==="fr" ?
-    "Bienvenue<br>Site sécurisé et rapide" :
-    "مرحبا بكم<br>موقع آمن وسريع لتعبئة الرصيد";
-}
+let selected = null;
+const container = document.getElementById("products");
 
-function nextPage(n){
-  document.querySelectorAll(".card").forEach(c=>c.classList.remove("active"));
-  document.getElementById("page"+n).classList.add("active");
-}
+data.forEach((item,i)=>{
+    const div = document.createElement("div");
+    div.className="product";
+    div.innerHTML = `${item.dh} دراهم = ${item.diamonds} 💎`;
+    div.onclick=()=>{
+        document.querySelectorAll(".product").forEach(p=>p.classList.remove("active"));
+        div.classList.add("active");
+        selected=item;
+    }
+    container.appendChild(div);
+});
 
 function sendWhatsApp(){
-  let name=document.getElementById("name").value;
-  let op=document.getElementById("operator").value;
-  let code=document.getElementById("code").value;
+    if(!selected){
+        alert("خاصك تختار كمية الجواهر");
+        return;
+    }
 
-  if(!name || !op || !code){
-    alert("خاصك تعمر جميع الخانات");
-    return;
-  }
+    const msg =
+`طلب شحن Free Fire:
+${selected.dh} دراهم
+${selected.diamonds} جوهرة`;
 
-  if(!(code.length===14 || code.length===16)){
-    alert("رمز التعبئة غير صحيح");
-    return;
-  }
-
-  let msg=
-    "طلب تعبئة 🔥\n"+
-    "الاسم: "+name+"\n"+
-    "الشركة: "+op+"\n"+
-    "المنتج: 7 دراهم : 50×2\n"+
-    "الرمز: "+code;
-
-  window.open("https://wa.me/212611026116?text="+encodeURIComponent(msg));
+    window.open(
+      "https://wa.me/212611026116?text="+encodeURIComponent(msg),
+      "_blank"
+    );
 }
 </script>
 
