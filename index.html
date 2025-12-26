@@ -1,161 +1,257 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>Chop 2 Nassre Game</title>
-<style>
-*{box-sizing:border-box;font-family:Arial}
-body{
-margin:0;
-min-height:100vh;
-background:
-radial-gradient(circle at bottom, rgba(255,0,0,0.25), transparent 60%),
-linear-gradient(135deg,#bfe9ff,#e0f4ff);
-display:flex;
-align-items:center;
-justify-content:center;
-}
+<title>Nassre Ait Akka Gems</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.container{
-width:360px;
-background:linear-gradient(180deg,#ffffff,#f2f2f2);
-border-radius:25px;
-padding:20px;
-text-align:center;
-box-shadow:0 0 30px rgba(0,0,0,0.2);
+<style>
+body{
+  margin:0;
+  font-family:Arial,Tahoma;
+  background:
+    radial-gradient(circle at center, rgba(255,0,0,0.25), transparent 60%),
+    linear-gradient(135deg,#cfe9ff,#9fd3ff);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .house{
-font-size:40px;
+  width:380px;
+  background:linear-gradient(180deg,#ffffff,#f2f2f2);
+  border-radius:25px;
+  padding:20px;
+  box-shadow:
+    0 0 25px rgba(255,0,0,0.5),
+    0 0 60px rgba(0,0,0,0.4);
 }
 
-h2{margin:10px 0}
+header{
+  text-align:center;
+}
+header h1{
+  margin:5px 0;
+  color:#000;
+}
+
+.lang{
+  text-align:center;
+  margin-bottom:10px;
+}
+.lang button{
+  padding:6px 14px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  background:#000;
+  color:#fff;
+  margin:0 5px;
+}
+
+.page{display:none;}
+.page.active{display:block;}
+
+input,select,textarea,button{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
 
 button{
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:20px;
-font-size:16px;
-cursor:pointer;
+  background:#000;
+  color:#fff;
+  cursor:pointer;
 }
 
-.green{background:#4caf50;color:white}
-.dark{background:#111;color:white}
-.gray{background:#eee}
-
-.lang button{
-width:48%;
+.products{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
 }
-
-.hidden{display:none}
 
 .product{
-border:2px solid #000;
-border-radius:15px;
-padding:15px;
-margin:10px 0;
-background:#fff;
+  padding:12px;
+  border-radius:15px;
+  background:#fff;
+  border:2px solid transparent;
+  cursor:pointer;
+  text-align:center;
+  font-weight:bold;
+}
+
+.product.active{
+  border:2px solid red;
+  box-shadow:0 0 15px rgba(255,0,0,0.6);
+}
+
+.home-btn{
+  background:#444;
 }
 
 .footer{
-font-size:13px;
-margin-top:15px;
-opacity:0.8;
+  text-align:center;
+  font-size:13px;
+  margin-top:10px;
+}
+
+.robot{
+  position:fixed;
+  bottom:15px;
+  right:15px;
+  background:#000;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:50%;
+  cursor:pointer;
+  box-shadow:0 0 15px rgba(0,0,0,0.6);
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-<div class="house">🏠</div>
+<div class="house">
 
-<!-- اختيار اللغة -->
-<div id="lang">
-<h2 id="t_lang">اختر اللغة</h2>
+<header>
+  <h1 id="siteName">Nassre Ait Akka</h1>
+  <p id="trust">🔒 الأمان والمصداقية</p>
+</header>
+
 <div class="lang">
-<button class="green" onclick="setLang('ar')">العربية</button>
-<button class="green" onclick="setLang('fr')">Français</button>
-</div>
-</div>
-
-<!-- الصفحة 1 -->
-<div id="page1" class="hidden">
-<h2 id="t_welcome">مرحبا بكم</h2>
-<p id="t_safe">🔒 موقع آمن وموثوق</p>
-<button class="green" onclick="next(2)" id="t_continue">إكمال</button>
+  <button onclick="setLang('ar')">العربية</button>
+  <button onclick="setLang('fr')">Français</button>
 </div>
 
-<!-- الصفحة 2 -->
-<div id="page2" class="hidden">
-<h2 id="t_choose">اختر المنتج</h2>
-
-<div class="product">7 DH = 100 💎 ×2</div>
-<div class="product">14 DH = 200 💎 ×2</div>
-<div class="product">28 DH = 400 💎 ×2</div>
-<div class="product">56 DH = 800 💎 ×2</div>
-<div class="product">112 DH = 1600 💎 ×2</div>
-<div class="product">154 DH = 2200 💎 ×2</div>
-
-<button class="dark" onclick="next(3)" id="t_continue2">إكمال</button>
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <h3 id="welcome">مرحبا بكم</h3>
+  <p id="welcomeText">أفضل موقع لشحن الجواهر ×2</p>
+  <button onclick="go(2)" id="next1">إكمال</button>
 </div>
 
-<!-- الصفحة 3 -->
-<div id="page3" class="hidden">
-<h2 id="t_pay">الدفع والمعلومات</h2>
-<input class="gray" placeholder="ID اللاعب" style="width:100%;padding:10px;border-radius:15px;border:1px solid #ccc"><br><br>
-<input class="gray" placeholder="رمز التعبئة" style="width:100%;padding:10px;border-radius:15px;border:1px solid #ccc">
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <h3 id="productTitle">اختيار الجواهر</h3>
 
-<button class="green" onclick="finish()" id="t_send">إرسال الطلب</button>
+  <div class="products">
+    <div class="product" onclick="selectProduct(this,'7 دراهم = 100 جوهرة ×2')">
+      7 دراهم = 100 جوهرة ×2
+    </div>
+    <div class="product" onclick="selectProduct(this,'14 دراهم = 200 جوهرة ×2')">
+      14 دراهم = 200 جوهرة ×2
+    </div>
+    <div class="product" onclick="selectProduct(this,'28 دراهم = 400 جوهرة ×2')">
+      28 دراهم = 400 جوهرة ×2
+    </div>
+    <div class="product" onclick="selectProduct(this,'56 دراهم = 800 جوهرة ×2')">
+      56 دراهم = 800 جوهرة ×2
+    </div>
+    <div class="product" onclick="selectProduct(this,'112 دراهم = 1600 جوهرة ×2')">
+      112 دراهم = 1600 جوهرة ×2
+    </div>
+    <div class="product" onclick="selectProduct(this,'154 دراهم = 2200 جوهرة ×2')">
+      154 دراهم = 2200 جوهرة ×2
+    </div>
+  </div>
+
+  <button onclick="go(3)" id="next2">إكمال</button>
+  <button class="home-btn" onclick="go(1)">🏠</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <h3 id="payTitle">المعلومات والدفع</h3>
+
+  <input id="name" placeholder="الاسم والنسب">
+
+  <select id="payment">
+    <option value="">طريقة الدفع</option>
+    <option>تعبئة Orange</option>
+    <option>تعبئة Inwi</option>
+    <option>تعبئة اتصالات المغرب</option>
+  </select>
+
+  <input id="code" placeholder="رمز التعبئة (14 أو 16 رقم)">
+  <textarea id="note" placeholder="ملاحظة"></textarea>
+
+  <button onclick="sendWhatsApp()" id="sendBtn">إرسال الطلب</button>
+  <button class="home-btn" onclick="go(1)">🏠</button>
+</div>
 
 <div class="footer">
-📞 0611026116 <br>
-📷 Instagram
-</div>
-</div>
-
-<!-- الوداع -->
-<div id="page4" class="hidden">
-<h2 id="t_bye">شكراً لثقتكم</h2>
-<p>👋 إلى اللقاء</p>
+  📞 0611026116<br>
+  📷 Instagram
 </div>
 
+</div>
+
+<div class="robot" onclick="alert(lang==='fr'?'Choisissez un produit ثم أكمل':'اختر منتج ثم أكمل')">
+🤖
 </div>
 
 <script>
-function hideAll(){
-['lang','page1','page2','page3','page4'].forEach(id=>{
-document.getElementById(id).classList.add('hidden');
-});
+let lang="ar";
+let chosenProduct="";
+
+function go(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
 }
 
-function next(n){
-hideAll();
-document.getElementById('page'+n).classList.remove('hidden');
+function selectProduct(el,text){
+  document.querySelectorAll('.product').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  chosenProduct=text;
 }
 
-function finish(){
-hideAll();
-document.getElementById('page4').classList.remove('hidden');
+function sendWhatsApp(){
+  let name=document.getElementById("name").value.trim();
+  let payment=document.getElementById("payment").value;
+  let code=document.getElementById("code").value.trim();
+  let note=document.getElementById("note").value.trim();
+
+  if(name===""||payment===""||code===""||chosenProduct===""){
+    alert(lang==="fr"?"Veuillez remplir tous les champs":"خاصك تعمّر جميع الخانات");
+    return;
+  }
+
+  if(!(code.length===14||code.length===16)){
+    alert(lang==="fr"?"Code invalide":"رمز التعبئة غير صحيح");
+    return;
+  }
+
+  let msg=
+  `👤 ${name}%0A`+
+  `📦 ${chosenProduct}%0A`+
+  `💳 ${payment}%0A`+
+  `🔢 ${code}%0A`+
+  `📝 ${note}`;
+
+  window.open("https://wa.me/212611026116?text="+msg,"_blank");
 }
 
 function setLang(l){
-hideAll();
-document.getElementById('page1').classList.remove('hidden');
-
-if(l==='fr'){
-t_lang.innerText="Choisir la langue";
-t_welcome.innerText="Bienvenue";
-t_safe.innerText="🔒 Site sécurisé et fiable";
-t_continue.innerText="Continuer";
-t_choose.innerText="Choisir le produit";
-t_continue2.innerText="Continuer";
-t_pay.innerText="Paiement et informations";
-t_send.innerText="Envoyer la demande";
-t_bye.innerText="Merci pour votre confiance";
-}
+  lang=l;
+  if(l==="fr"){
+    document.documentElement.dir="ltr";
+    trust.innerText="🔒 Sécurité et fiabilité";
+    welcome.innerText="Bienvenue";
+    welcomeText.innerText="Meilleur site de recharge ×2";
+    next1.innerText=next2.innerText="Continuer";
+    productTitle.innerText="Choisir des gemmes";
+    payTitle.innerText="Informations et paiement";
+    sendBtn.innerText="Envoyer la commande";
+    document.getElementById("name").placeholder="Nom complet";
+    document.getElementById("code").placeholder="Code de recharge (14 ou 16 chiffres)";
+  }else{
+    document.documentElement.dir="rtl";
+    trust.innerText="🔒 الأمان والمصداقية";
+  }
 }
 </script>
 
