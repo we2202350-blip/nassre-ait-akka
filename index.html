@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <title>Nassre Ait Akka</title>
@@ -7,226 +7,164 @@
 body{
     margin:0;
     font-family:Arial, sans-serif;
-    background:radial-gradient(circle at top, #cfe9ff, #6fa8dc);
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    background:radial-gradient(circle at top, #cfe9ff, #6bb7ff);
     height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
-.reflection{
-    position:absolute;
-    inset:0;
-    background:radial-gradient(circle at center, rgba(255,0,0,0.15), transparent 60%);
-    pointer-events:none;
-}
-.house{
-    width:380px;
-    background:#f8f8f8;
+.card{
+    width:360px;
+    background:#f9f9f9;
     border-radius:20px;
-    box-shadow:0 0 25px rgba(0,0,0,0.3);
     padding:20px;
-    position:relative;
-}
-.house:before{
-    content:"🏠";
-    font-size:40px;
-    position:absolute;
-    top:-25px;
-    left:50%;
-    transform:translateX(-50%);
-}
-h1{
-    text-align:center;
-    margin:10px 0;
-}
-.lock{
-    text-align:center;
-    color:#555;
-}
-.lang button{
-    width:100%;
-    padding:10px;
-    margin:5px 0;
-    border:none;
-    border-radius:10px;
-    background:#111;
-    color:#fff;
-    cursor:pointer;
-}
-.section{
+    box-shadow:0 0 40px rgba(255,0,0,0.3);
     display:none;
 }
-.section.active{
-    display:block;
-}
+.card.active{display:block;}
+h2{text-align:center;}
 .btn{
     width:100%;
     padding:12px;
-    border:none;
-    border-radius:10px;
-    background:#111;
-    color:#fff;
-    cursor:pointer;
     margin-top:10px;
+    border:none;
+    border-radius:30px;
+    background:#111;
+    color:white;
+    cursor:pointer;
+}
+.lang-btn{
+    background:#222;
 }
 .products{
-    display:grid;
-    grid-template-columns:1fr 1fr;
+    display:flex;
+    flex-direction:column;
     gap:10px;
 }
 .product{
-    padding:10px;
-    border:2px solid #ccc;
-    border-radius:10px;
-    text-align:center;
+    padding:12px;
+    border-radius:15px;
+    background:#fff;
+    border:2px solid transparent;
     cursor:pointer;
 }
 .product.selected{
-    border-color:#000;
-    background:#eaeaea;
+    border:2px solid #ffd000;
+    box-shadow:0 0 10px #ffd000;
 }
-input,select{
+input, select{
     width:100%;
     padding:10px;
-    margin:6px 0;
-    border-radius:8px;
+    margin-top:8px;
+    border-radius:10px;
     border:1px solid #ccc;
 }
 .footer{
     text-align:center;
-    margin-top:10px;
-}
-a{
-    color:#000;
-    text-decoration:none;
-    font-weight:bold;
-}
-.bot{
-    background:#000;
-    color:#fff;
-    padding:8px;
-    border-radius:8px;
-    margin-bottom:10px;
+    margin-top:15px;
     font-size:14px;
+}
+a{color:black;text-decoration:none;}
+.robot{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:black;
+    color:white;
+    padding:12px;
+    border-radius:50%;
+    cursor:pointer;
 }
 </style>
 </head>
+
 <body>
 
-<div class="reflection"></div>
-
-<div class="house">
-
-<h1>Nassre Ait Akka</h1>
-<div class="lock">🔒 الأمان والمصداقية</div>
-
-<div class="lang">
-    <button onclick="setLang('ar')">العربية</button>
-    <button onclick="setLang('fr')">Français</button>
-</div>
-
-<div class="bot" id="bot">🤖 مرحبا! اختر منتجك وأكمل الطلب</div>
-
 <!-- الصفحة 1 -->
-<div class="section active" id="page1">
-    <p id="welcome">مرحبا بكم<br>أفضل موقع لشحن الجواهر ×2</p>
-    <button class="btn" onclick="nextPage(2)">إكمال</button>
+<div class="card active" id="page1">
+    <h2>🏠 Nassre Ait Akka</h2>
+    <p style="text-align:center">🔒 الأمان والمصداقية</p>
+    <button class="btn lang-btn" onclick="setLang('ar')">العربية</button>
+    <button class="btn lang-btn" onclick="setLang('fr')">Français</button>
+    <p id="welcome" style="text-align:center;margin-top:10px;">
+        مرحباً بكم<br>أفضل موقع لشحن الجواهر ×2
+    </p>
+    <button class="btn" onclick="go(2)">إكمال</button>
 </div>
 
 <!-- الصفحة 2 -->
-<div class="section" id="page2">
-    <h3 id="choose">اختر المنتج</h3>
+<div class="card" id="page2">
+    <h2 id="chooseTitle">اختر المنتج</h2>
     <div class="products">
-        <div class="product" onclick="selectProduct(this,'50×2 = 100')">7DH<br>50×2</div>
-        <div class="product" onclick="selectProduct(this,'100×2 = 200')">14DH<br>100×2</div>
-        <div class="product" onclick="selectProduct(this,'210×2 = 420')">210×2</div>
-        <div class="product" onclick="selectProduct(this,'2200×2 = 4400')">2200×2</div>
+        <div class="product" onclick="selectProduct(this,50)">7 دراهم = 50 جوهرة</div>
+        <div class="product" onclick="selectProduct(this,100)">14 درهم = 100 جوهرة</div>
+        <div class="product" onclick="selectProduct(this,200)">28 درهم = 200 جوهرة</div>
+        <div class="product" onclick="selectProduct(this,400)">56 درهم = 400 جوهرة</div>
+        <div class="product" onclick="selectProduct(this,800)">112 درهم = 800 جوهرة</div>
+        <div class="product" onclick="selectProduct(this,2200)">308 درهم = 2200 جوهرة</div>
     </div>
-    <button class="btn" onclick="nextPage(3)">إكمال</button>
+    <p id="selectedText" style="text-align:center;margin-top:10px;"></p>
+    <button class="btn" onclick="go(3)">إكمال</button>
 </div>
 
 <!-- الصفحة 3 -->
-<div class="section" id="page3">
-    <h3 id="pay">الدفع والمعلومات</h3>
-
-    <input type="text" id="fullname" placeholder="الاسم والنسب">
-
-    <select>
-        <option>Maroc Telecom</option>
+<div class="card" id="page3">
+    <h2 id="payTitle">الدفع والمعلومات</h2>
+    <input type="text" id="name" placeholder="الاسم والنسب">
+    <select id="pay">
         <option>Orange</option>
         <option>Inwi</option>
+        <option>Maroc Telecom</option>
     </select>
-
     <input type="text" id="code" placeholder="رمز التعبئة (14 أو 16 رقم)">
-
     <button class="btn" onclick="sendOrder()">إرسال الطلب</button>
+
+    <div class="footer">
+        📞 <a href="https://wa.me/212611026116" target="_blank">واتساب</a><br>
+        📷 <a href="https://instagram.com" target="_blank">Instagram</a><br>
+        شكراً لثقتكم – إلى اللقاء 🙏
+    </div>
 </div>
 
-<div class="footer">
-    📞 <a href="https://wa.me/212611026116" target="_blank">واتساب</a><br>
-    📸 <a href="https://instagram.com/" target="_blank">Instagram</a><br>
-    🙏 شكرا لثقتكم – إلى اللقاء
-</div>
-
-</div>
+<!-- روبوت مساعد -->
+<div class="robot" onclick="alert('مرحبا 👋 إذا واجهت أي مشكل تواصل معنا عبر واتساب')">🤖</div>
 
 <script>
-let selectedProduct="";
 let lang="ar";
+let productValue=0;
 
-function nextPage(n){
-    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+function go(n){
+    document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
     document.getElementById('page'+n).classList.add('active');
-}
-
-function selectProduct(el,val){
-    document.querySelectorAll('.product').forEach(p=>p.classList.remove('selected'));
-    el.classList.add('selected');
-    selectedProduct=val;
-    document.getElementById('bot').innerText="🤖 تم اختيار المنتج: "+val;
-}
-
-function sendOrder(){
-    let name=document.getElementById('fullname').value;
-    let code=document.getElementById('code').value;
-
-    if(!selectedProduct){
-        alert("🤖 اختر منتجا أولا");
-        return;
-    }
-    if(name===""){
-        alert("🤖 أدخل الاسم والنسب");
-        return;
-    }
-    if(!(code.length===14 || code.length===16)){
-        alert("🤖 رمز التعبئة يجب أن يكون 14 أو 16 رقم");
-        return;
-    }
-
-    let msg=`طلب جديد:
-الاسم: ${name}
-المنتج: ${selectedProduct}
-رمز التعبئة: ${code}`;
-    window.open("https://wa.me/212611026116?text="+encodeURIComponent(msg));
 }
 
 function setLang(l){
     lang=l;
     if(l==="fr"){
-        document.documentElement.lang="fr";
-        document.documentElement.dir="ltr";
         welcome.innerHTML="Bienvenue<br>Meilleur site de recharge ×2";
-        choose.innerText="Choisissez le produit";
-        pay.innerText="Paiement et informations";
-        document.getElementById('bot').innerText="🤖 Choisissez un produit";
+        chooseTitle.innerText="Choisir le produit";
+        payTitle.innerText="Paiement et informations";
+        document.getElementById("name").placeholder="Nom complet";
+        document.getElementById("code").placeholder="Code de recharge (14 ou 16 chiffres)";
     }else{
-        document.documentElement.lang="ar";
-        document.documentElement.dir="rtl";
-        welcome.innerHTML="مرحبا بكم<br>أفضل موقع لشحن الجواهر ×2";
-        choose.innerText="اختر المنتج";
-        pay.innerText="الدفع والمعلومات";
-        document.getElementById('bot').innerText="🤖 مرحبا! اختر منتجك";
+        location.reload();
     }
+}
+
+function selectProduct(el,val){
+    document.querySelectorAll('.product').forEach(p=>p.classList.remove('selected'));
+    el.classList.add('selected');
+    productValue=val;
+    selectedText.innerText="تم اختيار: "+val+" جوهرة";
+}
+
+function sendOrder(){
+    let code=document.getElementById("code").value;
+    if(code.length!==14 && code.length!==16){
+        alert("رمز التعبئة غير صحيح");
+        return;
+    }
+    alert("تم إرسال الطلب بنجاح ✅");
 }
 </script>
 
