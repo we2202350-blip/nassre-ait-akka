@@ -3,161 +3,206 @@
 <head>
 <meta charset="UTF-8">
 <title>Nassre Ait Akka</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body{
   margin:0;
-  font-family:Arial, sans-serif;
-  background: radial-gradient(circle at top, #dff1ff, #9ecfff);
-  height:100vh;
+  font-family:Arial;
+  background:radial-gradient(circle,#a8d8ff,#3a7bd5);
+  min-height:100vh;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 }
-.card{
-  background:#111;
-  color:#fff;
+
+.container{
   width:360px;
-  border-radius:18px;
+  background:#0e0e0e;
+  color:white;
+  border-radius:20px;
   padding:20px;
-  box-shadow:0 0 25px rgba(255,0,0,.25);
+  box-shadow:0 0 30px rgba(255,0,0,0.4);
 }
-h2{text-align:center;margin:10px 0;}
-.btn{
+
+.page{display:none;}
+.page.active{display:block;}
+
+h2{text-align:center;}
+
+button{
   width:100%;
   padding:12px;
   margin-top:10px;
   border:none;
-  border-radius:25px;
-  background:#fff;
-  color:#000;
+  border-radius:12px;
+  background:linear-gradient(90deg,#ffd700,#ffae00);
   font-weight:bold;
   cursor:pointer;
 }
-.lang{background:#222;color:#fff;}
-.hidden{display:none;}
-.products div{
-  border:2px solid #444;
-  border-radius:12px;
+
+.product{
+  background:#111;
+  border:2px solid transparent;
   padding:10px;
   margin:8px 0;
+  border-radius:10px;
   cursor:pointer;
-  text-align:center;
 }
-.products div.active{
-  border-color:#ffd700;
-  box-shadow:0 0 10px #ffd700;
+.product.active{
+  border-color:yellow;
 }
-input,select{
+
+input,select,textarea{
   width:100%;
   padding:10px;
   margin-top:8px;
-  border-radius:8px;
+  border-radius:10px;
   border:none;
 }
+
+.lang{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.lang button{
+  width:auto;
+  padding:5px 10px;
+}
+
 .footer{
   text-align:center;
-  margin-top:12px;
-  font-size:14px;
-}
-.footer a{color:#fff;text-decoration:none;}
-.bot{
-  margin-top:10px;
-  background:#222;
-  padding:8px;
-  border-radius:10px;
   font-size:13px;
+  margin-top:10px;
+}
+
+.bot{
+  position:fixed;
+  bottom:15px;
+  right:15px;
+  background:black;
+  color:white;
+  padding:10px;
+  border-radius:50%;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="container">
 
-<!-- الصفحة 1 -->
-<div id="page1">
-  <h2>🏠 Nassre Ait Akka</h2>
-  <p style="text-align:center">الأمان والمصداقية 🔒</p>
-  <button class="btn lang" onclick="setLang('ar')">العربية</button>
-  <button class="btn lang" onclick="setLang('fr')">Français</button>
-  <button class="btn" onclick="go(2)">إكمال</button>
+<div class="lang">
+  <button onclick="setLang('ar')">AR</button>
+  <button onclick="setLang('fr')">FR</button>
 </div>
 
-<!-- الصفحة 2 -->
-<div id="page2" class="hidden">
-  <h2 id="prodTitle">اختر المنتج</h2>
-  <div class="products">
-    <div onclick="selectProd(this,'200')">7dh = 100 ×2 = 200 💎</div>
-    <div onclick="selectProd(this,'400')">14dh = 200 ×2 = 400 💎</div>
-    <div onclick="selectProd(this,'800')">28dh = 400 ×2 = 800 💎</div>
-    <div onclick="selectProd(this,'2200')">77dh = 1100 ×2 = 2200 💎</div>
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <h2 id="t1">مرحبا بكم</h2>
+  <p id="t2">🔒 الأمان والمصداقية مضمونة</p>
+  <button onclick="go(2)" id="b1">إكمال</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <h2 id="t3">اختر العرض</h2>
+
+  <div class="product" onclick="selectProduct(this,'7dh = 50 جوهرة ×2')">
+    7 دراهم = 50 جوهرة ×2
   </div>
-  <button class="btn" onclick="go(3)">إكمال</button>
+
+  <div class="product" onclick="selectProduct(this,'14dh = 100 جوهرة ×2')">
+    14 درهم = 100 جوهرة ×2
+  </div>
+
+  <button onclick="go(3)" id="b2">إكمال</button>
 </div>
 
-<!-- الصفحة 3 -->
-<div id="page3" class="hidden">
-  <h2 id="payTitle">الدفع والمعلومات</h2>
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <h2 id="t4">معلومات الطلب</h2>
+
   <input id="name" placeholder="الاسم والنسب">
+  <input id="iduser" placeholder="ID">
+  
   <select id="pay">
+    <option value="">طريقة الدفع</option>
     <option>Orange</option>
     <option>Inwi</option>
-    <option>Maroc Telecom</option>
+    <option>IAM</option>
   </select>
+
   <input id="code" placeholder="رمز التعبئة (14 أو 16 رقم)">
-  <button class="btn" onclick="send()">إرسال الطلب</button>
+  <textarea id="note" placeholder="ملاحظة"></textarea>
 
-  <div class="bot" id="bot">
-    🤖 مرحبا! اختر المنتج و أدخل رمز تعبئة صحيح.
-  </div>
+  <button onclick="send()">إرسال الطلب</button>
+</div>
 
-  <div class="footer">
-    <a href="https://wa.me/212611026116" target="_blank">📞 WhatsApp</a><br>
-    <a href="https://instagram.com" target="_blank">📷 Instagram</a>
-  </div>
+<div class="footer">
+  <a href="https://wa.me/212611026116" target="_blank">📞 واتساب</a><br>
+  <a href="https://www.instagram.com" target="_blank">📷 انستغرام</a>
 </div>
 
 </div>
+
+<div class="bot" onclick="alert('مرحبا 👋 اختر العرض ثم أرسل الطلب')">🤖</div>
 
 <script>
-let product="";
+let selectedProduct="";
 let lang="ar";
 
-function go(p){
-  document.querySelectorAll('[id^=page]').forEach(e=>e.classList.add('hidden'));
-  document.getElementById('page'+p).classList.remove('hidden');
+function go(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
 }
 
-function selectProd(el,val){
-  document.querySelectorAll('.products div').forEach(d=>d.classList.remove('active'));
+function selectProduct(el,val){
+  document.querySelectorAll('.product').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
-  product=val;
+  selectedProduct=val;
 }
 
 function send(){
-  let name=document.getElementById('name').value;
-  let code=document.getElementById('code').value;
-  if(!product){alert("اختر المنتج");return;}
-  if(!(code.length==14 || code.length==16)){alert("رمز غير صحيح");return;}
+  let name=name=document.getElementById("name").value.trim();
+  let id=document.getElementById("iduser").value.trim();
+  let pay=document.getElementById("pay").value;
+  let code=document.getElementById("code").value.trim();
 
-  let msg=`طلب جديد%0Aالاسم: ${name}%0Aالمنتج: ${product} جوهرة%0Aرمز: ${code}`;
-  window.location.href="https://wa.me/212611026116?text="+msg;
+  if(!name||!id||!pay||!code||!selectedProduct){
+    alert("عمر جميع الخانات");
+    return;
+  }
+
+  if(!(code.length==14||code.length==16)){
+    alert("رمز التعبئة غير صحيح");
+    return;
+  }
+
+  let msg=`الاسم: ${name}%0AID: ${id}%0Aالعرض: ${selectedProduct}%0Aالدفع: ${pay}%0Aالرمز: ${code}`;
+  window.open("https://wa.me/212611026116?text="+msg,"_blank");
 }
 
 function setLang(l){
   lang=l;
   if(l=="fr"){
-    document.documentElement.lang="fr";
     document.documentElement.dir="ltr";
-    prodTitle.innerText="Choisir le produit";
-    payTitle.innerText="Paiement et informations";
-    bot.innerText="🤖 Choisissez un produit et entrez un code valide.";
+    t1.innerText="Bienvenue";
+    t2.innerText="Sécurité et fiabilité";
+    b1.innerText=b2.innerText="Continuer";
+    t3.innerText="Choisir une offre";
+    t4.innerText="Informations";
   }else{
-    document.documentElement.lang="ar";
     document.documentElement.dir="rtl";
-    prodTitle.innerText="اختر المنتج";
-    payTitle.innerText="الدفع والمعلومات";
-    bot.innerText="🤖 مرحبا! اختر المنتج و أدخل رمز تعبئة صحيح.";
+    t1.innerText="مرحبا بكم";
+    t2.innerText="🔒 الأمان والمصداقية";
+    b1.innerText=b2.innerText="إكمال";
+    t3.innerText="اختر العرض";
+    t4.innerText="معلومات الطلب";
   }
 }
 </script>
