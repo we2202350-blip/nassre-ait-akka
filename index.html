@@ -1,135 +1,75 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>Chop 2 Nassre Game</title>
+<title>Nassre Ait Akka</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{box-sizing:border-box}
-
 body{
   margin:0;
+  font-family:Tahoma,Arial;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:radial-gradient(circle at top,#0a2a43,#000);
-  font-family:Arial;
   color:white;
 }
-
-/* ====== المنزل ====== */
 .house{
-  width:95%;
-  max-width:420px;
-  padding:25px;
-  border-radius:30px;
-  background:
-    linear-gradient(145deg,
-      rgba(0,200,255,.35),
-      rgba(0,0,0,.9),
-      rgba(160,80,255,.35)
-    );
-  box-shadow:
-    0 0 35px rgba(0,200,255,.6),
-    inset 0 0 25px rgba(255,255,255,.08);
-  position:relative;
+  width:360px;
+  background:linear-gradient(180deg,#1e3c72,#2a5298);
+  border-radius:25px;
+  padding:20px;
+  box-shadow:0 0 30px rgba(0,255,255,.4);
 }
-
-/* انعكاس */
-.house::before{
-  content:"";
-  position:absolute;
-  inset:-3px;
-  border-radius:30px;
-  background:linear-gradient(120deg,
-    transparent,
-    rgba(0,255,255,.6),
-    transparent
-  );
-  filter:blur(18px);
-  z-index:-1;
+header{
+  text-align:center;
+  margin-bottom:15px;
 }
-
-.page{display:none;text-align:center}
-.page.active{display:block}
-
-h1,h2{margin-top:0}
-
-.security{
-  background:rgba(0,255,255,.12);
-  border:1px solid rgba(0,255,255,.4);
-  padding:12px;
-  border-radius:15px;
-  font-size:14px;
-  margin:15px 0;
+header h1{
+  margin:5px 0;
 }
-
-input,select,textarea{
-  width:100%;
-  padding:11px;
-  margin-top:10px;
+.lang{
+  text-align:center;
+  margin-bottom:10px;
+}
+.lang button{
+  margin:0 5px;
+  padding:5px 12px;
   border:none;
-  border-radius:12px;
-  outline:none;
-}
-
-button{
-  width:100%;
-  padding:13px;
-  margin-top:12px;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(135deg,#1e90ff,#8a2be2);
-  color:white;
-  font-size:16px;
+  border-radius:10px;
   cursor:pointer;
-  box-shadow:0 0 15px rgba(30,144,255,.7);
 }
-button:hover{opacity:.9}
+.page{display:none;}
+.page.active{display:block;}
 
-.home{
-  background:linear-gradient(135deg,#555,#333);
+input,select,textarea,button{
+  width:100%;
+  margin:8px 0;
+  padding:10px;
+  border-radius:12px;
+  border:none;
+  outline:none;
   font-size:14px;
 }
-
-.whatsapp{
-  background:linear-gradient(135deg,#25D366,#128C7E);
+button{
+  background:linear-gradient(90deg,#00c853,#64dd17);
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
 }
-
-.langs{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
+.home-btn{
+  background:#333;
+  color:white;
 }
-
-.langs button{
-  width:48%;
-  background:#222;
+.footer{
+  text-align:center;
   font-size:13px;
+  margin-top:10px;
+  opacity:.9;
 }
-
-footer{
-  margin-top:15px;
-  font-size:13px;
-  opacity:.85;
-}
-
-a{color:#80ffdb;text-decoration:none}
-
-/* روبوت */
-#bot{
-  position:fixed;
-  bottom:15px;
-  left:15px;
-  background:linear-gradient(135deg,#6c63ff,#4b4bff);
-  padding:12px 15px;
-  border-radius:20px;
-  max-width:220px;
-  font-size:14px;
-  box-shadow:0 0 15px rgba(108,99,255,.7);
-}
+a{color:#00e5ff;text-decoration:none;}
 </style>
 </head>
 
@@ -137,127 +77,119 @@ a{color:#80ffdb;text-decoration:none}
 
 <div class="house">
 
-<!-- الصفحة 1 -->
+<header>
+  <h1>🏠 Nassre Ait Akka</h1>
+  <p id="trust">🔒 الأمان والمصداقية</p>
+</header>
+
+<div class="lang">
+  <button onclick="setLang('ar')">العربية</button>
+  <button onclick="setLang('fr')">Français</button>
+</div>
+
+<!-- PAGE 1 -->
 <div class="page active" id="p1">
-  <h1 id="t1">مرحبا بكم 👋</h1>
-
-  <div class="security" id="sec">
-    🔒 الأمان والمصداقية 100% <br>
-    ✔️ لا نطلب معلومات حساسة <br>
-    ✔️ التعامل بشفافية تامة
-  </div>
-
-  <p id="d1">موقع شحن الجواهر بسرعة وأمان</p>
-  <button onclick="go(2)">إكمال ➜</button>
-
-  <div class="langs">
-    <button onclick="setLang('ar')">العربية</button>
-    <button onclick="setLang('fr')">Français</button>
-  </div>
+  <h3 id="welcome">مرحبا بكم</h3>
+  <p id="welcomeText">موقع آمن وسريع لتعبئة الرصيد</p>
+  <button onclick="go(2)" id="next1">إكمال</button>
 </div>
 
-<!-- الصفحة 2 -->
+<!-- PAGE 2 -->
 <div class="page" id="p2">
-  <h2 id="t2">اختر المنتج 🎮</h2>
+  <h3 id="productTitle">اختيار المنتج</h3>
   <select id="product">
-    <option>50 جواهر - 7dh</option>
-    <option>100 جواهر - 14dh</option>
-    <option>200 جواهر - 28dh</option>
-    <option>400 جواهر - 56dh</option>
+    <option value="">-- اختر --</option>
+    <option>Orange</option>
+    <option>Inwi</option>
+    <option>IAM</option>
   </select>
-  <button onclick="saveProduct()">إكمال ➜</button>
-  <button class="home" onclick="go(1)">🏠 الرئيسية</button>
+  <button onclick="go(3)" id="next2">إكمال</button>
+  <button class="home-btn" onclick="go(1)">🏠 الرئيسية</button>
 </div>
 
-<!-- الصفحة 3 -->
+<!-- PAGE 3 -->
 <div class="page" id="p3">
-  <h2 id="t3">الدفع والمعلومات 💳</h2>
+  <h3 id="payTitle">الدفع والمعلومات</h3>
 
-  <input id="name" placeholder="اسم الزبون">
-  <select id="payment">
+  <input id="name" placeholder="الاسم الكامل">
+  
+  <select id="method">
+    <option value="">طريقة الدفع</option>
     <option>تعبئة Orange</option>
     <option>تعبئة Inwi</option>
     <option>تعبئة اتصالات المغرب</option>
   </select>
+
   <input id="code" placeholder="رمز التعبئة (14 أو 16 رقم)">
-  <textarea id="notes" placeholder="ملاحظات (اختياري)"></textarea>
+  <textarea id="note" placeholder="ملاحظات"></textarea>
 
-  <button class="whatsapp" onclick="send()">إرسال الطلب إلى واتساب</button>
-  <button class="home" onclick="go(1)">🏠 الرئيسية</button>
-
-  <footer>
-    📞 0611026116 <br>
-    📷 <a href="https://www.instagram.com/nassrext" target="_blank">Instagram</a><br>
-    <span id="bye">شكرا لثقتكم 🙏 إلى اللقاء 👋</span>
-  </footer>
+  <button onclick="sendWhatsApp()" id="sendBtn">إرسال الطلب إلى واتساب</button>
+  <button class="home-btn" onclick="go(1)">🏠 الرئيسية</button>
 </div>
 
+<div class="footer">
+  📞 <a href="tel:0611026116">0611026116</a><br>
+  📷 <a href="https://instagram.com" target="_blank">Instagram</a><br>
+  🙏 شكرا لثقتكم – إلى اللقاء
 </div>
 
-<!-- روبوت -->
-<div id="bot">
-🤖 مساعد:<br>
-اختار المنتج ➜ عمّر المعلومات ➜ صيفط الطلب ✔️
 </div>
 
 <script>
-let lang = localStorage.getItem("lang") || "ar";
-setLang(lang);
+let lang="ar";
 
 function go(n){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById("p"+n).classList.add("active");
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
 }
 
-function saveProduct(){
-  localStorage.setItem("product", product.value);
-  go(3);
-}
+function sendWhatsApp(){
+  let name=document.getElementById("name").value.trim();
+  let product=document.getElementById("product").value;
+  let method=document.getElementById("method").value;
+  let code=document.getElementById("code").value.trim();
+  let note=document.getElementById("note").value.trim();
 
-function send(){
-  if(!name.value || !code.value){
+  if(name===""||product===""||method===""||code===""){
     alert(lang==="fr"?"Veuillez remplir tous les champs":"خاصك تعمّر جميع الخانات");
     return;
   }
-  if(!/^(\d{14}|\d{16})$/.test(code.value)){
-    alert(lang==="fr"?"Code invalide (14 ou 16 chiffres)":"رمز التعبئة خاصو يكون 14 أو 16 رقم");
+
+  if(!(code.length===14||code.length===16)){
+    alert(lang==="fr"?"Code invalide":"رمز التعبئة غير صحيح");
     return;
   }
 
-  let msg =
-`طلب جديد:
-👤 الاسم: ${name.value}
-🎮 المنتج: ${localStorage.getItem("product")}
-💳 الدفع: ${payment.value}
-🔑 الرمز: ${code.value}
-📝 ملاحظات: ${notes.value}`;
+  let msg=
+  `👤 الاسم: ${name}%0A`+
+  `📦 المنتج: ${product}%0A`+
+  `💳 الدفع: ${method}%0A`+
+  `🔢 الرمز: ${code}%0A`+
+  `📝 ملاحظة: ${note}`;
 
-  window.open("https://wa.me/212611026116?text="+encodeURIComponent(msg),"_blank");
+  window.open("https://wa.me/212611026116?text="+msg,"_blank");
 }
 
 function setLang(l){
   lang=l;
-  localStorage.setItem("lang",l);
   if(l==="fr"){
-    t1.innerText="Bienvenue 👋";
-    d1.innerText="Recharge rapide et sécurisée";
-    t2.innerText="Choisissez le produit 🎮";
-    t3.innerText="Paiement et informations 💳";
-    sec.innerHTML="🔒 Sécurité et fiabilité 100%<br>✔️ Aucune donnée sensible<br>✔️ Transparence totale";
-    name.placeholder="Nom du client";
-    code.placeholder="Code de recharge (14 ou 16 chiffres)";
-    notes.placeholder="Notes (optionnel)";
-    bye.innerText="Merci pour votre confiance 👋";
+    document.documentElement.dir="ltr";
+    trust.innerText="🔒 Sécurité et fiabilité";
+    welcome.innerText="Bienvenue";
+    welcomeText.innerText="Service rapide et sécurisé";
+    next1.innerText=next2.innerText="Continuer";
+    productTitle.innerText="Choisir un produit";
+    payTitle.innerText="Paiement et informations";
+    sendBtn.innerText="Envoyer sur WhatsApp";
   }else{
-    t1.innerText="مرحبا بكم 👋";
-    d1.innerText="موقع شحن الجواهر بسرعة وأمان";
-    t2.innerText="اختر المنتج 🎮";
-    t3.innerText="الدفع والمعلومات 💳";
-    sec.innerHTML="🔒 الأمان والمصداقية 100%<br>✔️ لا نطلب معلومات حساسة<br>✔️ التعامل بشفافية تامة";
-    name.placeholder="اسم الزبون";
-    code.placeholder="رمز التعبئة (14 أو 16 رقم)";
-    notes.placeholder="ملاحظات (اختياري)";
-    bye.innerText="شكرا لثقتكم 🙏 إلى اللقاء 👋";
+    document.documentElement.dir="rtl";
+    trust.innerText="🔒 الأمان والمصداقية";
+    welcome.innerText="مرحبا بكم";
+    welcomeText.innerText="موقع آمن وسريع لتعبئة الرصيد";
+    next1.innerText=next2.innerText="إكمال";
+    productTitle.innerText="اختيار المنتج";
+    payTitle.innerText="الدفع والمعلومات";
+    sendBtn.innerText="إرسال الطلب إلى واتساب";
   }
 }
 </script>
