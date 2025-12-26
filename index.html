@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>AKKA GAMES</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Cairo',sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#000000,#11142a);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+}
+
+.card{
+  background:rgba(255,255,255,0.06);
+  padding:30px;
+  border-radius:18px;
+  width:100%;
+  max-width:420px;
+  box-shadow:0 0 20px rgba(0,0,0,0.6);
+}
+
+h1{
+  text-align:center;
+  color:#4b8cff;
+  margin-bottom:20px;
+}
+
+input, select, textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+  border-radius:10px;
+  border:none;
+  outline:none;
+}
+
+textarea{
+  resize:none;
+  height:70px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  background:#4b8cff;
+  border:none;
+  border-radius:12px;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#3a6fd9;
+}
+
+.support{
+  position:fixed;
+  bottom:15px;
+  right:15px;
+  background:#25D366;
+  color:#fff;
+  padding:12px 16px;
+  border-radius:50px;
+  cursor:pointer;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>شحن Free Fire</h1>
+
+  <input type="text" id="name" placeholder="اسم الزبون">
+  <input type="text" id="idff" placeholder="ID Free Fire">
+
+  <select id="amount">
+    <option value="">اختر الكمية</option>
+    <option value="50 جواهر - 7dh">50 جواهر - 7dh</option>
+    <option value="100 جواهر - 14dh">100 جواهر - 14dh</option>
+    <option value="200 جواهر - 28dh">200 جواهر - 28dh</option>
+    <option value="400 جواهر - 56dh">400 جواهر - 56dh</option>
+  </select>
+
+  <select id="operator">
+    <option value="">شركة التعبئة</option>
+    <option value="Orange">Orange</option>
+    <option value="Inwi">Inwi</option>
+    <option value="IAM">اتصالات المغرب</option>
+  </select>
+
+  <input type="text" id="code" placeholder="رمز التعبئة">
+
+  <textarea id="note" placeholder="ملاحظة (اختياري)"></textarea>
+
+  <button onclick="sendWhatsApp()">إرسال الطلب إلى واتساب</button>
+</div>
+
+<div class="support" onclick="openBot()">🤖 مساعد</div>
+
+<script>
+function sendWhatsApp(){
+  var name = document.getElementById("name").value;
+  var idff = document.getElementById("idff").value;
+  var amount = document.getElementById("amount").value;
+  var operator = document.getElementById("operator").value;
+  var code = document.getElementById("code").value;
+  var note = document.getElementById("note").value;
+
+  if(name=="" || idff=="" || amount=="" || operator=="" || code==""){
+    alert("عافاك عمر جميع الخانات");
+    return;
+  }
+
+  var msg =
+  "طلب شحن Free Fire%0A" +
+  "الاسم: " + name + "%0A" +
+  "ID: " + idff + "%0A" +
+  "الكمية: " + amount + "%0A" +
+  "الشركة: " + operator + "%0A" +
+  "رمز التعبئة: " + code + "%0A" +
+  "ملاحظة: " + note;
+
+  var phone = "212611026116";
+  window.open("https://wa.me/" + phone + "?text=" + msg,"_blank");
+}
+
+function openBot(){
+  alert("👋 مرحبا!\n1️⃣ دخل الاسم و ID\n2️⃣ اختار الكمية\n3️⃣ دخل رمز التعبئة\n4️⃣ اضغط إرسال");
+}
+</script>
+
+</body>
+</html>
