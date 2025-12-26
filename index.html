@@ -2,149 +2,160 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Nassre Ait Akka</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Chop 2 Nassre Game</title>
 <style>
+*{box-sizing:border-box;font-family:Arial}
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:radial-gradient(circle at top, #3aa0ff, #0b2b4a);
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:white;
+margin:0;
+min-height:100vh;
+background:
+radial-gradient(circle at bottom, rgba(255,0,0,0.25), transparent 60%),
+linear-gradient(135deg,#bfe9ff,#e0f4ff);
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-.card{
-    width:340px;
-    background:#0f4c81;
-    border-radius:20px;
-    padding:20px;
-    box-shadow:
-        0 0 20px #4fc3ff,
-        0 0 40px rgba(79,195,255,0.6);
-    text-align:center;
+.container{
+width:360px;
+background:linear-gradient(180deg,#ffffff,#f2f2f2);
+border-radius:25px;
+padding:20px;
+text-align:center;
+box-shadow:0 0 30px rgba(0,0,0,0.2);
 }
 
-h2{
-    margin:5px 0;
+.house{
+font-size:40px;
 }
 
-select, input{
-    width:100%;
-    padding:12px;
-    margin:8px 0;
-    border:none;
-    border-radius:10px;
-    font-size:15px;
-}
+h2{margin:10px 0}
 
 button{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-    border:none;
-    border-radius:30px;
-    background:linear-gradient(90deg,#2ecc71,#27ae60);
-    color:white;
-    font-size:16px;
-    cursor:pointer;
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:20px;
+font-size:16px;
+cursor:pointer;
 }
+
+.green{background:#4caf50;color:white}
+.dark{background:#111;color:white}
+.gray{background:#eee}
+
+.lang button{
+width:48%;
+}
+
+.hidden{display:none}
 
 .product{
-    background:#08365e;
-    padding:10px;
-    border-radius:12px;
-    margin:6px 0;
-    cursor:pointer;
-    box-shadow:0 0 10px rgba(79,195,255,0.5);
-}
-
-.product.active{
-    background:#2ecc71;
-    color:black;
+border:2px solid #000;
+border-radius:15px;
+padding:15px;
+margin:10px 0;
+background:#fff;
 }
 
 .footer{
-    margin-top:10px;
-    font-size:13px;
-    opacity:0.9;
+font-size:13px;
+margin-top:15px;
+opacity:0.8;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="container">
+<div class="house">🏠</div>
 
-<h2>🏠 Nassre Ait Akka</h2>
-<p>🔒 الأمان والمصداقية</p>
+<!-- اختيار اللغة -->
+<div id="lang">
+<h2 id="t_lang">اختر اللغة</h2>
+<div class="lang">
+<button class="green" onclick="setLang('ar')">العربية</button>
+<button class="green" onclick="setLang('fr')">Français</button>
+</div>
+</div>
 
-<select id="lang">
-<option>العربية</option>
-<option>Français</option>
-</select>
+<!-- الصفحة 1 -->
+<div id="page1" class="hidden">
+<h2 id="t_welcome">مرحبا بكم</h2>
+<p id="t_safe">🔒 موقع آمن وموثوق</p>
+<button class="green" onclick="next(2)" id="t_continue">إكمال</button>
+</div>
 
-<h3>💎 اختر كمية الجواهر</h3>
+<!-- الصفحة 2 -->
+<div id="page2" class="hidden">
+<h2 id="t_choose">اختر المنتج</h2>
 
-<div id="products"></div>
+<div class="product">7 DH = 100 💎 ×2</div>
+<div class="product">14 DH = 200 💎 ×2</div>
+<div class="product">28 DH = 400 💎 ×2</div>
+<div class="product">56 DH = 800 💎 ×2</div>
+<div class="product">112 DH = 1600 💎 ×2</div>
+<div class="product">154 DH = 2200 💎 ×2</div>
 
-<input type="text" placeholder="معرف اللاعب">
-<input type="text" placeholder="رقم التعبئة (14 أو 16 رقم)">
-<input type="text" placeholder="ملاحظات">
+<button class="dark" onclick="next(3)" id="t_continue2">إكمال</button>
+</div>
 
-<button onclick="sendWhatsApp()">إرسال الطلب إلى واتساب</button>
+<!-- الصفحة 3 -->
+<div id="page3" class="hidden">
+<h2 id="t_pay">الدفع والمعلومات</h2>
+<input class="gray" placeholder="ID اللاعب" style="width:100%;padding:10px;border-radius:15px;border:1px solid #ccc"><br><br>
+<input class="gray" placeholder="رمز التعبئة" style="width:100%;padding:10px;border-radius:15px;border:1px solid #ccc">
+
+<button class="green" onclick="finish()" id="t_send">إرسال الطلب</button>
 
 <div class="footer">
 📞 0611026116 <br>
-📷 Instagram <br>
-🙏 شكرا لثقتكم – إلى اللقاء
+📷 Instagram
+</div>
+</div>
+
+<!-- الوداع -->
+<div id="page4" class="hidden">
+<h2 id="t_bye">شكراً لثقتكم</h2>
+<p>👋 إلى اللقاء</p>
 </div>
 
 </div>
 
 <script>
-const data = [
-  {dh:7, diamonds:100},
-  {dh:14, diamonds:200},
-  {dh:28, diamonds:400},
-  {dh:56, diamonds:800},
-  {dh:112, diamonds:1600},
-  {dh:154, diamonds:2200}
-];
-
-let selected = null;
-const container = document.getElementById("products");
-
-data.forEach((item,i)=>{
-    const div = document.createElement("div");
-    div.className="product";
-    div.innerHTML = `${item.dh} دراهم = ${item.diamonds} 💎`;
-    div.onclick=()=>{
-        document.querySelectorAll(".product").forEach(p=>p.classList.remove("active"));
-        div.classList.add("active");
-        selected=item;
-    }
-    container.appendChild(div);
+function hideAll(){
+['lang','page1','page2','page3','page4'].forEach(id=>{
+document.getElementById(id).classList.add('hidden');
 });
+}
 
-function sendWhatsApp(){
-    if(!selected){
-        alert("خاصك تختار كمية الجواهر");
-        return;
-    }
+function next(n){
+hideAll();
+document.getElementById('page'+n).classList.remove('hidden');
+}
 
-    const msg =
-`طلب شحن Free Fire:
-${selected.dh} دراهم
-${selected.diamonds} جوهرة`;
+function finish(){
+hideAll();
+document.getElementById('page4').classList.remove('hidden');
+}
 
-    window.open(
-      "https://wa.me/212611026116?text="+encodeURIComponent(msg),
-      "_blank"
-    );
+function setLang(l){
+hideAll();
+document.getElementById('page1').classList.remove('hidden');
+
+if(l==='fr'){
+t_lang.innerText="Choisir la langue";
+t_welcome.innerText="Bienvenue";
+t_safe.innerText="🔒 Site sécurisé et fiable";
+t_continue.innerText="Continuer";
+t_choose.innerText="Choisir le produit";
+t_continue2.innerText="Continuer";
+t_pay.innerText="Paiement et informations";
+t_send.innerText="Envoyer la demande";
+t_bye.innerText="Merci pour votre confiance";
+}
 }
 </script>
 
